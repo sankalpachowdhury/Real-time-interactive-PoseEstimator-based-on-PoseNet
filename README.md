@@ -12,7 +12,7 @@ Pose estimation using PoseNet pretrained model and calling it through ml5.js
 
 3. Online javascript web editor called P5.js is used as the web editor.
 
-4. Pose Estimation is done in the stapes.
+4. Pose Estimation is done in the steps.
 
 
 

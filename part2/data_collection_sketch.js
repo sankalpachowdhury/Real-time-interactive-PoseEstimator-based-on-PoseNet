@@ -10,24 +10,25 @@ let poseNet;
 let pose;
 let skeleton;
 
-let brain;
+let brain;  // an object: brain 
 
-let state = 'waiting';
-let targeLabel;
+let state = 'waiting';  // Keep track of the flow of the sketch
+let targeLabel;         // define target label
 
-function keyPressed() {
- if (key == 's') {
-    brain.saveData();
+function keyPressed() { // Step 3: Function for interaction for recording the training data
+
+ if (key == 's') {      // save data funtionality by key = s
+    brain.saveData();   // save into a json file
   } else {
-    targetLabel = key;
+    targetLabel = key;  // target label = key pressed (key will be a target label)
     console.log(targetLabel);
-    setTimeout(function() {
+    setTimeout(function() { // Step 4: define a delay function for delay after key being pressed
       console.log('collecting');
-      state = 'collecting';
-      setTimeout(function() {
-        console.log('not collecting');
-        state = 'waiting';
-      }, 10000);
+      state = 'collecting'; // after delay, state is collecting
+      setTimeout(function() { // set time out again to stop collecting
+        console.log('not collecting'); // stop collecting
+        state = 'waiting';  // stop collecting and update the state
+      }, 10000);   //// this is a state machine implementation 
     }, 10000);
   }
 }
@@ -40,27 +41,28 @@ function setup() {
   poseNet = ml5.poseNet(video, modelLoaded);
   poseNet.on('pose', gotPoses);
 
-  let options = {
-    inputs: 34,
-    outputs: 4,
-    task: 'classification',
+  let options = {   // Step 2: Define the properties of the network
+    inputs: 34,     // Inputs
+    outputs: 4,     // Outputs
+    task: 'classification',  // classifier 
     debug: true
   }
-  brain = ml5.neuralNetwork(options);
+  brain = ml5.neuralNetwork(options); // Step 1: Assign brain to nuralnetwork object from ml5.js
 }
-
-function gotPoses(poses) {
+  // LOAD TRAINING DATA
+  // brain.loadData('ymca.json', dataReady);
+function gotPoses(poses) { //step 5: when state is collecting, 
   // console.log(poses); 
   if (poses.length > 0) {
     pose = poses[0].pose;
     skeleton = poses[0].skeleton;
-    if (state == 'collecting') {
-      let inputs = [];
-      for (let i = 0; i < pose.keypoints.length; i++) {
-        let x = pose.keypoints[i].position.x;
-        let y = pose.keypoints[i].position.y;
-        inputs.push(x);
-        inputs.push(y);
+    if (state == 'collecting') { // only when we recieve a data, I should only actually record data
+      let inputs = [];  //step 6: define an array
+      for (let i = 0; i < pose.keypoints.length; i++) { // step 6: flatten the data, to a plane array
+        let x = pose.keypoints[i].position.x;  // they are not in a plane array
+        let y = pose.keypoints[i].position.y;  // they are not in a plane array
+        inputs.push(x);  // now take the target and put in an array
+        inputs.push(y);  //step 5: when we have a pose, we add data
       }
       let target = [targetLabel];
       brain.addData(inputs, target);

@@ -10,7 +10,8 @@ function setup() {
     debug: true
   }
   brain = ml5.neuralNetwork(options);
-  brain.loadData('ymca.json', dataReady);
+  // LOAD TRAINING DATA
+  brain.loadData('ymca.json', dataReady); // load the existing data, then when the data is ready...
 }
 
 function dataReady() { // step 7: when the data is ready,

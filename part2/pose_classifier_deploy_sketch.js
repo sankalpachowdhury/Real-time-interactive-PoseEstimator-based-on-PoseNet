@@ -21,14 +21,21 @@ function setup() {
     debug: true
   }
   brain = ml5.neuralNetwork(options);
-  const modelInfo = {
-    model: 'model2/model.json',
-    metadata: 'model2/model_meta.json',
+  
+  // LOAD PRETRAINED MODEL
+  
+  const modelInfo = {    // step 9: create an object to store the files/ file_names
+    model: 'model2/model.json',  
+    metadata: 'model2/model_meta.json', // copied from the ml5 neural network documentation
     weights: 'model2/model.weights.bin',
   };
-  brain.load(modelInfo, brainLoaded);
-}
+  brain.load(modelInfo, brainLoaded);  //step 8: load the model
+  // there are three files for the model "model.jeson", "model_meta.jeson", "model.weights.bin"
 
+}
+// *** remember we are using two machine learning models, 
+// one is poseNet
+// other is Neural network brain classifier
 function brainLoaded() {
   console.log('pose classification ready!');
   classifyPose();
@@ -67,8 +74,30 @@ function gotPoses(poses) {
 }
 
 
-function modelLoaded() {
+function brainLoaded() {  // step 9: model ready after calling deep learning model here
   console.log('poseNet ready');
+  classifyPose(); // step 10: when the brain is loaded we can ask it to classify
+}
+
+function classifyPose() { // step 10: inputs are defined here making afunction
+  if (pose) {  // verify there is a pose at the first place
+    let inputs = [];  
+    for (let i = 0; i < pose.keypoints.length; i++) {
+      let x = pose.keypoints[i].position.x;
+      let y = pose.keypoints[i].position.y;
+      inputs.push(x);  
+      inputs.push(y);
+    }
+    brain.classify(inputs, gotResult);  //step 12: when the brain is loaded --> classify pose, if there is a pose--> call brain.classify
+  } else {
+    setTimeout(classifyPose, 100); // if no pose detected, wait for 100ms 
+  }
+}
+function gotResult(error, results) {  //step 11: got results call back
+  if (results[0].confidence > 0.75) {
+    poseLabel = results[0].label.toUpperCase();
+  }
+  classifyPose(); // step 12: when the brain is loaded --> classify pose, if there is a pose--> call brain.classify
 }
 
 function draw() {

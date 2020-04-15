@@ -1,9 +1,9 @@
-// All code: https://editor.p5js.org/codingtrain/sketches/JoZl-QRPK
+// All code:-
 
 // Separated into three sketches
-// 1: Data Collection: https://editor.p5js.org/codingtrain/sketches/kTM0Gm-1q
-// 2: Model Training: https://editor.p5js.org/codingtrain/sketches/-Ywq20rM9
-// 3: Model Deployment: https://editor.p5js.org/codingtrain/sketches/c5sDNr8eM
+// 1: Data Collection: 
+// 2: Model Training: 
+// 3: Model Deployment: 
 
 let video;
 let poseNet;

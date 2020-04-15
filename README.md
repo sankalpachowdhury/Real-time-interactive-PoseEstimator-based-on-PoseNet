@@ -29,10 +29,36 @@ Pose estimation using PoseNet pretrained model and calling it through ml5.js
 4. Follow along the steps in the sketch.js file.
 
     step 1: 
-    Referance to ml5 PoseNet Liberary and include arguments : video and modelLoaded 
+    Reference to ml5 PoseNet Library and include arguments : video and modelLoaded 
     This should be called steup() function
     
     step 2: 
+    Calling the PoseNet model using the function modelLoaded()
+    
+    step 3:
+    Printing the objects to the console by using console.log(poses) and the     open the object description from the inspect console of the browser.
+    
+    step 4:
+    Making an assumption first, i.e. let pose, which means it is used by only one person.
+    
+    step 5:
+    Check the length of the array : if(poses.length>0)
+    If the array is non-empty then we come to the two property of the object description, which are poses and skeleton, and we need to store them.
+    
+    step 6:
+    Argument if(pose) is used. This means if(pose)=TRUE, i.e. if there exist a valid pose. We first make sure that there is a valid pose.
+    
+    step 7:
+    Draw the circle where you want to estimate pose.
+    Ellipse function is used to draw the ellipse using the x and y coordinates and the distance (distance between the x and y coordinates of right eye and left eye).
+    
+    step 8:
+    First calculation of distance d is done by measuring the distance between the x and y coordinates of right eye and left eye.
+    Next add the wrist/ hand keypoints. by using the ellipse function. 
+    Next we take an internal variable, whose scope is within the for loop, this act as a connection between different key points. 
+    
+    step 9:
+    We take an internal and use for loop. This loop will go through all the kepoints and draw a circle at each location.
     
 ##***Part 2:***
     

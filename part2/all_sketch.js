@@ -1,9 +1,10 @@
-// All code:-
+
+// All code: 
 
 // Separated into three sketches
-// 1: Data Collection: 
+// 1: Data Collection:
 // 2: Model Training: 
-// 3: Model Deployment: 
+// 3: Model Deployment:
 
 let video;
 let poseNet;
@@ -11,7 +12,7 @@ let pose;
 let skeleton;
 
 let brain;  // an object: brain 
-let poseLabel = "";
+let poseLabel = ""; // step 13: draw the classified alphabets in big size into the canvas
 
 let state = 'waiting';  // Keep track of the flow of the sketch
 let targetLabel;  // define target label
@@ -88,8 +89,8 @@ function classifyPose() { // step 10: inputs are defined here making afunction
 }
 
 function gotResult(error, results) {  //step 11: got results call back
-  if (results[0].confidence > 0.75) {
-    poseLabel = results[0].label.toUpperCase();
+  if (results[0].confidence > 0.75) {  // only update when confident 
+    poseLabel = results[0].label.toUpperCase(); // capital uppercase alphabet
   }
   classifyPose(); // step 12: when the brain is loaded --> classify pose, if there is a pose--> call brain.classify
 }
@@ -140,7 +141,7 @@ function modelLoaded() {
 }
 
 function draw() {
-  push();
+  push(); // push 
   translate(video.width, 0);
   scale(-1, 1);
   image(video, 0, 0, video.width, video.height);
@@ -162,9 +163,9 @@ function draw() {
       ellipse(x, y, 16, 16);
     }
   }
-  pop();
+  pop(); // pop makes it to the center 
 
-  fill(255, 0, 255);
+  fill(255, 0, 255); // step 13: this is for the printing on screen
   noStroke();
   textSize(512);
   textAlign(CENTER, CENTER);

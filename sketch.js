@@ -48,7 +48,7 @@ function draw() {
     }
     
     for (let i = 0; i < skeleton.length; i++) {  // step 8  connection between different positions
-      let a = skeleton[i][0]; // skeliton is a 2d array, in the second dimention it holds the two locations connected
+      let a = skeleton[i][0]; // skeleton is a 2d array, in the second dimention it holds the two locations connected
       let b = skeleton[i][1];
       strokeWeight(2);  // thicker line
       stroke(255);  

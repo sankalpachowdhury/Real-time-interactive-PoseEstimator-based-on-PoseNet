@@ -12,15 +12,15 @@ Pose Estimation is done in the steps.
 
 Image -----> PoseNet -----> Array of (x,y) coordinates -----> Confidence Score '%'
 
-Steps for building a Realtime Pose Estimator in the browser is given below
+Steps for building a Realtime Pose Estimator in the browser is given below1. 
 
-Call the 'ml5.min.js' dependencies from the index.html file.
+1. Call the 'ml5.min.js' dependencies from the index.html file.
 
-Define the Window size and all backgrounds.
+2. Define the Window size and all backgrounds.
 
-Define the css Style for the project in style.css file.
+3. Define the css Style for the project in style.css file.
 
-Follow along the steps in the sketch.js file.
+4. Follow along the steps in the sketch.js file.
 
 step 1: Reference to ml5 PoseNet Library and include arguments : video and modelLoaded This should be called steup() function
 
